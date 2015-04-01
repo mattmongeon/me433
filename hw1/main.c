@@ -123,7 +123,7 @@ int main()
     {
         // --- Invert LED1 every 0.5 s. --- //
 
-        if( (_CP0_GET_COUNT() >= (CLK_FREQ_HZ / 2)) || !(PORTB & 0x2000) )
+        if( (_CP0_GET_COUNT() >= (CLK_FREQ_HZ / 4)) || !(PORTB & 0x2000) )
         {
             LATBINV = 0x80;
             _CP0_SET_COUNT(0);
