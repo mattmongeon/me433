@@ -28,7 +28,7 @@
 // DEVCFG2 - get the CPU clock to 40MHz
 #pragma config FPLLIDIV = DIV_2 // divide input clock to be in range 4-5MHz
 #pragma config FPLLMUL = MUL_20 // multiply clock after FPLLIDIV
-#pragma config UPLLIDIV = DIV_2 // divide clock after FPLLMUL - 40MHz
+#pragma config UPLLIDIV = DIV_2 // divide by 2 to give 4 MHz to give to USB multiplier/divider.
 #pragma config UPLLEN = ON // USB clock on
 #pragma config FPLLODIV = DIV_2 // divide clock by 2 to output on pin
 
