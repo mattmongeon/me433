@@ -19,4 +19,12 @@ void display_pixel_set(int row, int col, int val); // set the pixel at the given
 
 int display_pixel_get(int row, int col);  // get the pixel at the given row and column
 
+// Writes the parameter string to the display.
+//
+// Params:
+// const char* str - the null-teriminated string to write.
+// int row - 0-indexed row of the upper-left corner of the start of the string.
+// int col - 0-indexed column of the upper-left corner of the start of the string.
+void display_write_string(const char* str, int row, int col);
+
 #endif

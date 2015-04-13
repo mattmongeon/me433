@@ -8,7 +8,6 @@
         <itemPath>I2C/i2c_master_int.h</itemPath>
         <itemPath>I2C/i2c_display.h</itemPath>
       </logicalFolder>
-      <itemPath>lcd_display.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -22,7 +21,6 @@
         <itemPath>I2C/i2c_master_int.c</itemPath>
       </logicalFolder>
       <itemPath>main.c</itemPath>
-      <itemPath>lcd_display.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -156,6 +154,9 @@
         <property key="save-temps" value="false"/>
         <property key="wpo-lto" value="false"/>
       </C32Global>
+      <PICkit3PlatformTool>
+        <property key="firmware.download.all" value="false"/>
+      </PICkit3PlatformTool>
     </conf>
   </confs>
 </configurationDescriptor>

@@ -1,5 +1,7 @@
 #include <xc.h> // processor SFR definitions
 #include <sys/attribs.h> // __ISR macro
+#include "I2C/i2c_master_int.h"
+
 
 // --- DEVCFGs Here --- //
 
@@ -74,6 +76,11 @@ int main()
     __builtin_enable_interrupts();
 
 
+    // --- Set Up I2C --- //
+
+    display_init();
+
+
     // --- Set Up USER Button --- //
 
     TRISBSET = 0x2000;
@@ -119,6 +126,16 @@ int main()
     OC1CONSET = 0x8000;
 
 
+    // Write a test string to the display
+
+    display_clear();
+    display_draw();
+
+    char str[30];
+    sprintf(str, "Test!");
+    display_write_string(str, 0, 0);
+
+    
     while(1)
     {
         // --- Invert LED1 every 0.5 s. --- //
