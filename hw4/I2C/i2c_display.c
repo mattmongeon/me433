@@ -203,3 +203,38 @@ void display_write_string(const char* str, int row, int col)
 
     display_draw();
 }
+
+void display_draw_v_line_seg(int col, int row_start, int length)
+{
+    if( length > 64 - row_start )
+        length = 64 - row_start;
+    
+    int row = row_start;
+    for( ; row < length; ++row )
+        display_pixel_set(row, col, 1);
+
+    display_draw();
+}
+
+void display_draw_v_line(int col)
+{
+    display_draw_v_line_seg(col, 0, 64);
+}
+
+void display_draw_h_line_seg(int row, int col_start, int length)
+{
+    if( length > 128 - col_start )
+        length = 128 - col_start;
+
+    int col = col_start;
+    for( ; col < length; ++col )
+        display_pixel_set(row, col, 1);
+
+    display_draw();
+}
+
+void display_draw_h_line(int row)
+{
+    display_draw_h_line_seg(row, 0, 128);
+}
+

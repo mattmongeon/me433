@@ -135,6 +135,8 @@ int main()
     sprintf(str, "Test!");
     display_write_string(str, 0, 0);
 
+    display_draw_h_line_seg( 10, 0, 26 );
+    display_draw_v_line_seg( 25, 0, 10 );
     
     while(1)
     {

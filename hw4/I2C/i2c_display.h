@@ -27,4 +27,12 @@ int display_pixel_get(int row, int col);  // get the pixel at the given row and 
 // int col - 0-indexed column of the upper-left corner of the start of the string.
 void display_write_string(const char* str, int row, int col);
 
+void display_draw_v_line_seg(int col, int row_start, int length);
+
+void display_draw_v_line(int col);
+
+void display_draw_h_line_seg(int row, int col_start, int length);
+
+void display_draw_h_line(int row);
+
 #endif
