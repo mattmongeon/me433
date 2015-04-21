@@ -178,32 +178,20 @@ int main()
         char str[30];
         display_clear();
 
-        sprintf( str, "A_x: %d", accels[0] );
+        float temp = ((float)accels[0] / 32768.0) * 2.0;
+        sprintf( str, "A_x: %f", temp );
         display_write_string( str, row, 0 );
         row += 8;
 
-        sprintf( str, "A_y: %d", accels[1] );
+        temp = ((float)accels[1] / 32768.0) * 2.0;
+        sprintf( str, "A_y: %f", temp );
         display_write_string( str, row, 0 );
         row += 8;
 
-        sprintf( str, "A_z: %d", accels[2] );
+        temp = ((float)accels[2] / 32768.0) * 2.0;
+        sprintf( str, "A_z: %f", temp );
         display_write_string( str, row, 0 );
         row += 8;
-
-        sprintf( str, "Mag_x: %d", mags[0] );
-        display_write_string( str, row, 0 );
-        row += 8;
-
-        sprintf( str, "Mag_y: %d", mags[1] );
-        display_write_string( str, row, 0 );
-        row += 8;
-
-        sprintf( str, "Mag_z: %d", mags[2] );
-        display_write_string( str, row, 0 );
-        row += 8;
-
-        sprintf( str, "Temp: %d", temp );
-        display_write_string( str, row, 0 );
 
         display_draw();
     }
