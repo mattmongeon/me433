@@ -48,10 +48,13 @@ void acc_setup() {
   TRISAbits.TRISA4 = 0; // set CS to output and digital if necessary - pin 12
   CS = 1;
 
-  // select a pin for SDI1 - RPA1 - pin 3
-  SDI1Rbits.SDI1R = 0b0000;
+  ANSELBCLR = 0x1 << 14;
+
+  // select a pin for SDI1 - RPB11 - pin 22
+  SDI1Rbits.SDI1R = 0b0011;
 
   // select a pin for SD01 - RPB2R - pin 6
+  ANSELBCLR = 0x1 << 6;
   RPB2Rbits.RPB2R = 0b0011;
 
   // Setup the master Master - SPI1
