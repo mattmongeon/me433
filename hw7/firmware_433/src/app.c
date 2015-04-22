@@ -55,6 +55,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 
 #include "app.h"
 #include "system_config/pic32mx_usb_sk2_int_dyn/framework/system/display/i2c_display.h"
+#include "system_config/pic32mx_usb_sk2_int_dyn/framework/system/accel/accel.h"
 
 
 // *****************************************************************************
@@ -332,6 +333,7 @@ void APP_Initialize ( void )
     display_draw();
 
     // Now initialize our accelerometer
+    acc_setup();
 }
 
 
@@ -409,10 +411,31 @@ void APP_Tasks ( void )
 
                 if(movement_length > 50)
                 {
+                    short accels[2];
+                    acc_read_register( OUT_X_L_A, (unsigned char*)accels, 4 );
+
                     appData.mouseButton[0] = MOUSE_BUTTON_STATE_RELEASED;
                     appData.mouseButton[1] = MOUSE_BUTTON_STATE_RELEASED;
-                    appData.xCoordinate =(int8_t)dir_table[vector & 0x07] ;
-                    appData.yCoordinate =(int8_t)dir_table[(vector+2) & 0x07];
+
+                    float pct = (((float)accels[0]) / 32768.0) * 2.0;
+                    int trunc_pct = pct * 10.0;
+                    if( trunc_pct < -10.0 )
+                        trunc_pct = -10.0;
+
+                    if( trunc_pct > 10.0 )
+                        trunc_pct = 10.0;
+
+                    appData.xCoordinate =(int8_t)trunc_pct;
+
+                    pct = (((float)accels[1]) / 32768.0) * 2.0;
+                    trunc_pct = pct * 10.0;
+                    if( trunc_pct < -10.0 )
+                        trunc_pct = -10.0;
+
+                    if( trunc_pct > 10.0 )
+                        trunc_pct = 10.0;
+                    
+                    appData.yCoordinate =(int8_t)trunc_pct;
                     vector ++;
                     movement_length = 0;
 
