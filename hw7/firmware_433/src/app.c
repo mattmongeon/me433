@@ -417,25 +417,12 @@ void APP_Tasks ( void )
                     appData.mouseButton[0] = MOUSE_BUTTON_STATE_RELEASED;
                     appData.mouseButton[1] = MOUSE_BUTTON_STATE_RELEASED;
 
-                    float pct = (((float)accels[0]) / 32768.0) * 2.0;
-                    int trunc_pct = pct * 10.0;
-                    if( trunc_pct < -10.0 )
-                        trunc_pct = -10.0;
+                    int movement = ((((int)accels[0]) * 20) / 32768);
+                    appData.xCoordinate =(int8_t)movement;
 
-                    if( trunc_pct > 10.0 )
-                        trunc_pct = 10.0;
-
-                    appData.xCoordinate =(int8_t)trunc_pct;
-
-                    pct = (((float)accels[1]) / 32768.0) * 2.0;
-                    trunc_pct = pct * 10.0;
-                    if( trunc_pct < -10.0 )
-                        trunc_pct = -10.0;
-
-                    if( trunc_pct > 10.0 )
-                        trunc_pct = 10.0;
+                    movement = ((((int)accels[1]) * 20) / 32768);
                     
-                    appData.yCoordinate =(int8_t)trunc_pct;
+                    appData.yCoordinate =(int8_t)movement;
                     vector ++;
                     movement_length = 0;
 
