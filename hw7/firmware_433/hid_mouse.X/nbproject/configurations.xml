@@ -26,8 +26,15 @@
                          projectFiles="true">
             <logicalFolder name="framework" displayName="framework" projectFiles="true">
               <logicalFolder name="system" displayName="system" projectFiles="true">
+                <logicalFolder name="accel" displayName="accel" projectFiles="true">
+                  <itemPath>../src/system_config/pic32mx_usb_sk2_int_dyn/framework/system/accel/accel.h</itemPath>
+                </logicalFolder>
                 <logicalFolder name="clk" displayName="clk" projectFiles="true">
                   <itemPath>../src/system_config/pic32mx_usb_sk2_int_dyn/framework/system/clk/sys_clk_static.h</itemPath>
+                </logicalFolder>
+                <logicalFolder name="display" displayName="display" projectFiles="true">
+                  <itemPath>../src/system_config/pic32mx_usb_sk2_int_dyn/framework/system/display/i2c_master_int.h</itemPath>
+                  <itemPath>../src/system_config/pic32mx_usb_sk2_int_dyn/framework/system/display/i2c_display.h</itemPath>
                 </logicalFolder>
               </logicalFolder>
             </logicalFolder>
@@ -160,9 +167,20 @@
                          projectFiles="true">
             <logicalFolder name="framework" displayName="framework" projectFiles="true">
               <logicalFolder name="system" displayName="system" projectFiles="true">
+                <logicalFolder name="accel" displayName="accel" projectFiles="true">
+                  <logicalFolder name="src" displayName="src" projectFiles="true">
+                    <itemPath>../src/system_config/pic32mx_usb_sk2_int_dyn/framework/system/accel/src/spi_accel.c</itemPath>
+                  </logicalFolder>
+                </logicalFolder>
                 <logicalFolder name="clk" displayName="clk" projectFiles="true">
                   <logicalFolder name="src" displayName="src" projectFiles="true">
                     <itemPath>../src/system_config/pic32mx_usb_sk2_int_dyn/framework/system/clk/src/sys_clk_static.c</itemPath>
+                  </logicalFolder>
+                </logicalFolder>
+                <logicalFolder name="display" displayName="display" projectFiles="true">
+                  <logicalFolder name="src" displayName="src" projectFiles="true">
+                    <itemPath>../src/system_config/pic32mx_usb_sk2_int_dyn/framework/system/display/src/i2c_display.c</itemPath>
+                    <itemPath>../src/system_config/pic32mx_usb_sk2_int_dyn/framework/system/display/src/i2c_master_int.c</itemPath>
                   </logicalFolder>
                 </logicalFolder>
                 <logicalFolder name="ports" displayName="ports" projectFiles="true">
@@ -1139,6 +1157,7 @@
         <property key="ToolFirmwareOption.UseLatestFirmware" value="true"/>
         <property key="UART1" value="true"/>
         <property key="UART2" value="true"/>
+        <property key="firmware.download.all" value="false"/>
         <property key="hwtoolclock.frcindebug" value="false"/>
         <property key="memories.aux" value="false"/>
         <property key="memories.bootflash" value="true"/>
