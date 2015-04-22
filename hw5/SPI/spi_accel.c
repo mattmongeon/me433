@@ -50,8 +50,9 @@ void acc_setup() {
 
   ANSELBCLR = 0x1 << 14;
 
-  // select a pin for SDI1 - RPB11 - pin 22
-  SDI1Rbits.SDI1R = 0b0011;
+  // select a pin for SDI1 - RPA1 - pin 3
+  ANSELACLR = 0x02;
+  SDI1Rbits.SDI1R = 0b0000;
 
   // select a pin for SD01 - RPB2R - pin 6
   ANSELBCLR = 0x1 << 6;
