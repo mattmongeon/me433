@@ -9,6 +9,9 @@
 
 #define SIZE WIDTH*HEIGHT/8 //display size, in bytes
 
+#define CENTER_ROW 31
+#define CENTER_COL 63
+
 static unsigned char video_buffer[SIZE+1] = {0};          // buffer for sending over i2c. The first byte allows us to store the control character
 static unsigned char * gddram = video_buffer + 1;   // actual video ram. write pixels to gddram
 
@@ -200,37 +203,55 @@ void display_write_string(const char* str, int row, int col)
         col = write_char(str[c], row, col);
         ++c;
     }
-
-    display_draw();
 }
 
-void display_draw_v_line_seg(int col, int row_start, int length)
+void display_draw_v_line_seg(int row_start, int col, int length)
 {
-    if( length > 64 - row_start )
-        length = 64 - row_start;
-    
-    int row = row_start;
-    for( ; row < length; ++row )
-        display_pixel_set(row, col, 1);
+    if( length > 0 )
+    {
+        if( length > 64 - row_start )
+            length = 64 - row_start;
 
-    display_draw();
+        int i = 0;
+        for( ; i < length; ++i )
+            display_pixel_set(row_start + i, col, 1);
+    }
+    else if( length < 0 )
+    {
+        if( row_start + length < 0 )
+            length = row_start - 64;
+
+        int i = 0;
+        for( ; i > length; --i )
+            display_pixel_set(row_start + i, col, 1);
+    }
 }
 
 void display_draw_v_line(int col)
 {
-    display_draw_v_line_seg(col, 0, 64);
+    display_draw_v_line_seg(0, col, 64);
 }
 
 void display_draw_h_line_seg(int row, int col_start, int length)
 {
-    if( length > 128 - col_start )
-        length = 128 - col_start;
+    if( length > 0 )
+    {
+        if(length > 128 - col_start)
+            length = 128 - col_start;
 
-    int col = col_start;
-    for( ; col < length; ++col )
-        display_pixel_set(row, col, 1);
+        int i = 0;
+        for( ; i < length; ++i )
+            display_pixel_set(row, col_start + i, 1);
+    }
+    else if( length < 0 )
+    {
+        if( col_start + length < 0 )
+            length = col_start - 128;
 
-    display_draw();
+        int i = 0;
+        for( ; i > length; --i )
+            display_pixel_set(row, col_start + i, 1);
+    }
 }
 
 void display_draw_h_line(int row)
@@ -238,3 +259,18 @@ void display_draw_h_line(int row)
     display_draw_h_line_seg(row, 0, 128);
 }
 
+void display_draw_v_bar(int pct)
+{
+    int length = (pct * CENTER_ROW) / 100;
+    display_draw_v_line_seg(CENTER_ROW, CENTER_COL - 1, length);
+    display_draw_v_line_seg(CENTER_ROW, CENTER_COL, length);
+    display_draw_v_line_seg(CENTER_ROW, CENTER_COL + 1, length);
+}
+
+void display_draw_h_bar(int pct)
+{
+    int length = (pct * CENTER_COL) / 100;
+    display_draw_h_line_seg(CENTER_ROW - 1, CENTER_COL, length);
+    display_draw_h_line_seg(CENTER_ROW, CENTER_COL, length);
+    display_draw_h_line_seg(CENTER_ROW + 1, CENTER_COL, length);
+}

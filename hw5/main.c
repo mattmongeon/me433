@@ -178,20 +178,29 @@ int main()
         char str[30];
         display_clear();
 
-        float temp = ((float)accels[0] / 32768.0) * 2.0;
-        sprintf( str, "A_x: %f", temp );
-        display_write_string( str, row, 0 );
-        row += 8;
+        //float pct = ((float)accels[0] / 32768.0) - 1.0;
+        //pct /= 100.0;
+        //display_draw_h_bar((int)pct);
 
-        temp = ((float)accels[1] / 32768.0) * 2.0;
-        sprintf( str, "A_y: %f", temp );
-        display_write_string( str, row, 0 );
-        row += 8;
+        float pct = (((float)accels[0]) / 32768.0) * 2.0;
+        int trunc_pct = pct * 100.0;
+        if( trunc_pct < -100.0 )
+            trunc_pct = -100.0;
 
-        temp = ((float)accels[2] / 32768.0) * 2.0;
-        sprintf( str, "A_z: %f", temp );
-        display_write_string( str, row, 0 );
-        row += 8;
+        if( trunc_pct > 100.0 )
+            trunc_pct = 100.0;
+
+        display_draw_h_bar(trunc_pct);
+
+        pct = (((float)accels[1]) / 32768.0) * 2.0;
+        trunc_pct = pct * 100.0;
+        if( trunc_pct < -100.0 )
+            trunc_pct = -100.0;
+
+        if( trunc_pct > 100.0 )
+            trunc_pct = 100.0;
+
+        display_draw_v_bar(trunc_pct);
 
         display_draw();
     }
