@@ -50,6 +50,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "system_config.h"
 #include "system_definitions.h"
 #include "app.h"
+#include "framework/system/display/i2c_display.h"
 
 
 // ****************************************************************************
@@ -94,8 +95,8 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #pragma config USERID = 0 // some 16bit userid
 #pragma config PMDL1WAY = ON // not multiple reconfiguration, check this
 #pragma config IOL1WAY = ON // not multimple reconfiguration, check this
-#pragma config FUSBIDIO = ON // USB pins controlled by USB module
-#pragma config FVBUSONIO = ON // controlled by USB module
+#pragma config FUSBIDIO = OFF // USB pins controlled by USB module
+#pragma config FVBUSONIO = OFF // controlled by USB module
 
 
 // *****************************************************************************

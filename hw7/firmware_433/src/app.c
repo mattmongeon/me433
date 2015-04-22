@@ -54,6 +54,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // *****************************************************************************
 
 #include "app.h"
+#include "system_config/pic32mx_usb_sk2_int_dyn/framework/system/display/i2c_display.h"
 
 
 // *****************************************************************************
@@ -324,6 +325,13 @@ void APP_Initialize ( void )
     appData.isMouseReportSendBusy = false;
     appData.isSwitchPressed = false;
     appData.ignoreSwitchPress = false;
+
+    // Initialize the display
+    display_init();
+    display_clear();
+    display_draw();
+
+    // Now initialize our accelerometer
 }
 
 
@@ -407,6 +415,12 @@ void APP_Tasks ( void )
                     appData.yCoordinate =(int8_t)dir_table[(vector+2) & 0x07];
                     vector ++;
                     movement_length = 0;
+
+                    display_clear();
+                    char str[30];
+                    sprintf(str, "(X, Y): %d, %d", appData.xCoordinate, appData.yCoordinate);
+                    display_write_string(str, 0, 0);
+                    display_draw();
                 }
             }
             else
